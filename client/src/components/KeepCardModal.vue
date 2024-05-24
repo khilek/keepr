@@ -6,9 +6,10 @@ import { logger } from "../utils/Logger.js";
 
 import { useRoute } from "vue-router";
 import { keepsService } from "../services/KeepsService.js";
+import { Keep } from "../models/Keep.js";
 
 
-// defineProps({ ingredient: { type: Ingredient, required: true } })
+defineProps({ keep: { type: Keep, required: true } })
 const activeKeep = computed(() => AppState.activeKeep)
 const account = computed(() => AppState.account)
 const route = useRoute()
@@ -50,7 +51,7 @@ async function eraseKeep(keepId) {
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content" v-if="activeKeep">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="keepCardModalLabel">{{ activeKeep.name }}</h1>
+          <h1 class="modal-title fs-5 " id="keepCardModalLabel">{{ activeKeep.name }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -59,16 +60,21 @@ async function eraseKeep(keepId) {
               <div class="col-6 col-md-6">
                 <img class="img-fluid rounded" :src="activeKeep.img" alt="Recipe-Image">
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-evenly align-items-center">
-                {{ activeKeep.description }}
+              <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center flex-column align-items-center">
+                <h2 class="fw-bolder fs-1">{{ activeKeep.name }}</h2>
+                <p> {{ activeKeep.description }}</p>
               </div>
             </div>
+            <p class="text-end "><img class="me-2 creator-img" :src="activeKeep.creator.picture" alt="">{{
+              activeKeep.creator.name }}
+            </p>
           </div>
         </div>
         <div class="modal-footer">
           <div class="text-start w-100 d-flex justify-content-between">
             <button @click="eraseKeep(AppState.activeKeep.id)" class=" btn btn-outline-danger"
               title="Full Send!">Erase</button>
+
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             <!-- <h2><i role="button" title="Update a Keep!" data-bs-toggle="modal" data-bs-target="#UpdateRecipeForm"
@@ -86,6 +92,12 @@ async function eraseKeep(keepId) {
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
 
+.creator-img {
+  height: 6vh;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
 }
 </style>

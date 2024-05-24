@@ -24,7 +24,7 @@ async function getKeepById(keepId) {
 
 <template>
   <div class="card">
-    <img class="keep-img" :src="keep.img" :alt="keep.description" :title="keep.description">
+    <img class="keep-img " :src="keep.img" :alt="keep.description" :title="keep.description">
     <div class="bottom-left text-light fw-bold shadow rounded bg-dark " role="button" data-bs-toggle="modal"
       data-bs-target="#keepCardModal" @click="getKeepById(keep.id)">{{ keep.name }}</div>
     <img class="creator-img bottom-right" :src="keep.creator.picture" :title="keep.creator.name" alt="account image">

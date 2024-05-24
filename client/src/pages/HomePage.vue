@@ -25,7 +25,7 @@ onMounted(() => {
 
 <template>
   <div class="container-fluid">
-    <section class="row masonry my-3">
+    <section class="row masonry my-3 p-3 justify-content-center">
       <div class="col-lg-2 col-md-4 col-sm-12" v-for="keep in keeps" :key="keep.id">
         <KeepsCard :keep="keep" />
 
