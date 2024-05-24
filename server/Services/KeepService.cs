@@ -1,6 +1,3 @@
-
-
-
 namespace keepr.Services;
 
 public class KeepService
@@ -43,6 +40,13 @@ public class KeepService
       throw new Exception($"Invalid id: {keepId}");
     }
     return keep;
+  }
+
+  internal List<VaultKeepRelationship> GetKeepsInVault(int vaultId)
+  {
+    // TODO this will need to check the vault and the user to know if you can get the keeps
+    List<VaultKeepRelationship> keeps = _repository.GetKeepsInVault(vaultId);
+    return keeps;
   }
 
   internal Keep UpdateKeep(int keepId, string userId, Keep keepData)

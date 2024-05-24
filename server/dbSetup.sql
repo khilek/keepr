@@ -35,3 +35,23 @@ CREATE TABLE IF NOT EXISTS vault (
 )
 
 DROP TABLE keep
+
+CREATE TABLE IF NOT EXISTS vaultkeep (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+    creatorId VARCHAR(255) NOT NULL,
+    keepId INT NOT NULL,
+    vaultId INT NOT NULL,
+    FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE,
+    FOREIGN KEY (keepId) REFERENCES keep (id) ON DELETE CASCADE,
+    FOREIGN KEY (vaultId) REFERENCES vault (id) ON DELETE CASCADE
+)
+
+SELECT vaultkeep.*, keep.*, accounts.*
+FROM
+    vaultkeep
+    JOIN keep ON vaultkeep.keepId = keep.id
+    JOIN accounts on accounts.id = vaultkeep.creatorId
+WHERE
+    vaultkeep.vaultId = 51

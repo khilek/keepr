@@ -25,10 +25,12 @@ onMounted(() => {
 
 <template>
   <div class="container-fluid">
-    <section class="row masonry my-3 p-3 justify-content-center">
-      <div class="col-lg-2 col-md-4 col-sm-12" v-for="keep in keeps" :key="keep.id">
-        <KeepsCard :keep="keep" />
+    <section class="row justify-content-between">
+      <div class="col-12 masonry mb-3 mt-3 p-3">
+        <div v-for="keep in keeps" :key="keep.id">
+          <KeepsCard :keep="keep" />
 
+        </div>
       </div>
     </section>
   </div>
@@ -57,7 +59,13 @@ onMounted(() => {
 // }
 
 .masonry {
-  columns: 200px;
+  columns: 300px;
   column-gap: .5em;
+}
+
+.masonry>* {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 </style>
