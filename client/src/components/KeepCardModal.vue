@@ -65,7 +65,7 @@ async function eraseKeep(keepId) {
                 <p> {{ activeKeep.description }}</p>
               </div>
             </div>
-            <p class="text-end "><img class="me-2 creator-img" :src="activeKeep.creator.picture" alt="">{{
+            <p class="text-end "><img class="me-2 creator-img" :src="activeKeep.creator.picture" alt="creator image">{{
               activeKeep.creator.name }}
             </p>
           </div>
@@ -95,7 +95,7 @@ async function eraseKeep(keepId) {
 }
 
 .creator-img {
-  height: 6vh;
+  height: 4vh;
   aspect-ratio: 1/1;
   border-radius: 50%;
   object-fit: cover;
