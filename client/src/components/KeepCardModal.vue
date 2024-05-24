@@ -1,0 +1,91 @@
+<script setup>
+import { computed, onMounted } from "vue";
+import { AppState } from "../AppState.js";
+import Pop from "../utils/Pop.js";
+import { logger } from "../utils/Logger.js";
+
+import { useRoute } from "vue-router";
+import { keepsService } from "../services/KeepsService.js";
+
+
+// defineProps({ ingredient: { type: Ingredient, required: true } })
+const activeKeep = computed(() => AppState.activeKeep)
+const account = computed(() => AppState.account)
+const route = useRoute()
+
+async function eraseKeep(keepId) {
+  try {
+
+    const wantsToErase = await Pop.confirm('Are you sure you want to Erase?', 'There is no undoing this...', 'ERASE', "question")
+
+    if (!wantsToErase) return
+
+    logger.log('ERASING KEEP', AppState.activeKeep.id)
+
+    await keepsService.eraseKeep(keepId)
+
+  } catch (error) {
+    Pop.toast("Couldn't Erase Keep")
+    logger.error(error)
+  }
+}
+
+// NO ON MOUNTED IN THE MODAL NEEDED
+// onMounted(() => {
+//   getIngredientsForRecipes()
+// })
+
+
+
+
+</script>
+
+
+<template>
+  <!-- Button trigger modal -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="keepCardModal" tabindex="-1" aria-labelledby="keepCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content" v-if="activeKeep">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="keepCardModalLabel">{{ activeKeep.name }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 col-md-6">
+                <img class="img-fluid rounded" :src="activeKeep.img" alt="Recipe-Image">
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-evenly align-items-center">
+                {{ activeKeep.description }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="text-start w-100 d-flex justify-content-between">
+            <button @click="eraseKeep(AppState.activeKeep.id)" class=" btn btn-outline-danger"
+              title="Full Send!">Erase</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <!-- <h2><i role="button" title="Update a Keep!" data-bs-toggle="modal" data-bs-target="#UpdateRecipeForm"
+                class="mdi mdi-plus-circle p-3"></i></h2> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<style lang="scss" scoped>
+.recipe-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+
+}
+</style>

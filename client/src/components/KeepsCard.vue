@@ -2,10 +2,22 @@
 import { computed } from "vue";
 import { AppState } from "../AppState.js";
 import { Keep } from "../models/Keep.js";
+import Pop from "../utils/Pop.js";
+import { logger } from "../utils/Logger.js";
+import { keepsService } from "../services/KeepsService.js";
 
 
 defineProps({ keep: { type: Keep, required: true } })
 
+async function getKeepById(keepId) {
+  try {
+    await keepsService.getKeepById(keepId)
+  }
+  catch (error) {
+    Pop.toast("Couldn't Get Keeps", 'error');
+    logger.error(error)
+  }
+}
 
 </script>
 
@@ -13,7 +25,8 @@ defineProps({ keep: { type: Keep, required: true } })
 <template>
   <div class="card">
     <img class="keep-img" :src="keep.img" :alt="keep.description" :title="keep.description">
-    <div class="bottom-left text-light fw-bold shadow rounded bg-dark ">{{ keep.name }}</div>
+    <div class="bottom-left text-light fw-bold shadow rounded bg-dark " role="button" data-bs-toggle="modal"
+      data-bs-target="#keepCardModal" @click="getKeepById(keep.id)">{{ keep.name }}</div>
     <img class="creator-img bottom-right" :src="keep.creator.picture" :title="keep.creator.name" alt="account image">
   </div>
 </template>

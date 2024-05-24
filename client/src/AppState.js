@@ -9,5 +9,8 @@ export const AppState = reactive({
   account: null,
 
   /**@type {Keep[]} */
-  keeps: []
+  keeps: [],
+
+  /**@type {Keep} */
+  activeKeep: null
 })
