@@ -17,6 +17,18 @@ public class VaultService
     return vault;
   }
 
+  internal string EraseVault(int vaultId, string userId)
+  {
+    Vault VaultToErase = GetVaultById(vaultId);
+
+    if (VaultToErase.CreatorId != userId)
+    {
+      throw new Exception("NOT YOUR VAULT TO ERASE");
+    }
+    _repository.EraseVault(vaultId);
+    return "VAULT has been ERASED";
+  }
+
   internal Vault GetVaultById(int vaultId)
   {
     Vault vault = _repository.GetVaultById(vaultId);

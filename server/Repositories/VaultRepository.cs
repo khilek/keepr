@@ -1,6 +1,7 @@
 
 
 
+
 namespace keepr.Repositories;
 
 public class VaultRepository
@@ -68,5 +69,12 @@ public class VaultRepository
     Vault vault = _db.Query<Vault, Profile, Vault>(sql, PopulateCreator, VaultToUpdate).FirstOrDefault();
 
     return vault;
+  }
+
+  internal void EraseVault(int vaultId)
+  {
+    string sql = "DELETE FROM vault WHERE id = @vaultId;";
+
+    _db.Execute(sql, new { vaultId });
   }
 }
