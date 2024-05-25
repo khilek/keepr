@@ -4,9 +4,11 @@ import { AppState } from "../AppState.js";
 import { keepsService } from "../services/KeepsService.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
+import { vaultsService } from "../services/VaultsService.js";
+import { useRoute } from "vue-router";
 
 const keeps = computed(() => AppState.keeps)
-
+const route = useRoute()
 
 async function getKeeps() {
   try {

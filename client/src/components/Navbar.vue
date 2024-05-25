@@ -38,7 +38,13 @@ function toggleTheme() {
         <li>
           <button class="btn text-success lighten-30 selectable text-uppercase" data-bs-toggle="modal"
             data-bs-target="#KeepFormModal">
-            CREATE
+            CREATE KEEP
+          </button>
+        </li>
+        <li>
+          <button class="btn text-success lighten-30 selectable text-uppercase" data-bs-toggle="modal"
+            data-bs-target="#VaultFormModal">
+            CREATE VAULT
           </button>
         </li>
       </ul>
@@ -52,6 +58,7 @@ function toggleTheme() {
       <Login />
     </div>
   </nav>
+  <VaultFormModal />
   <KeepFormModal />
 </template>
 
