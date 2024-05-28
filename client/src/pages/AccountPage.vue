@@ -9,7 +9,7 @@ import { useRoute } from "vue-router";
 
 const account = computed(() => AppState.account)
 const activeVaults = computed(() => AppState.activeVault)
-// const vaults = computed(() => AppState.vaults)
+const vaults = computed(() => AppState.vaults)
 const route = useRoute()
 
 
@@ -20,10 +20,11 @@ const route = useRoute()
 
 
 
-async function getVaultById(vaultId) {
+
+async function getVaultById() {
   try {
-    route.params.vaultId
-    await vaultsService.getVaultById(vaultId)
+    console.log(route.params.vaultId)
+    await vaultsService.getVaultById(route.params.vaultId)
   } catch (error) {
     Pop.toast("Couldn't Get Vaults By Id", 'error');
     logger.error(error)
@@ -44,9 +45,9 @@ onMounted(() => {
 
   <div class="container">
     <section class="row">
-      <div class="col-12" v-for="activeVault in activeVaults" :key="activeVault.id">
+      <!-- <div class="col-12" v-for="activeVault in activeVaults" :key="activeVault.id">
         <VaultCard :activeVault="activeVault" />
-      </div>
+      </div> -->
     </section>
   </div>
   <button @click="getVaultById()"></button>

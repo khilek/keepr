@@ -76,7 +76,7 @@ async function createKeep() {
               <label for="keepDescription">Keep Description</label>
             </div>
             <div class="form-floating mb-3">
-              <textarea v-model="keepData.img" class="form-control" required placeholder="Image" id="keepImg"
+              <textarea v-model="keepData.img" type="url" class="form-control" required placeholder="Image" id="keepImg"
                 maxLength="1000"></textarea>
               <label for="keepImg">Keep Image</label>
             </div>

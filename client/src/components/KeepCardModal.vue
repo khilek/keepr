@@ -7,8 +7,9 @@ import { logger } from "../utils/Logger.js";
 import { useRoute } from "vue-router";
 import { keepsService } from "../services/KeepsService.js";
 import { Keep } from "../models/Keep.js";
+import { vaultKeepsService } from "../services/VaultKeepsService.js";
 
-
+const vk = computed(() => AppState.vaultKeeps)
 defineProps({ keep: { type: Keep, required: true } })
 const activeKeep = computed(() => AppState.activeKeep)
 const account = computed(() => AppState.account)
@@ -30,7 +31,6 @@ async function eraseKeep(keepId) {
     logger.error(error)
   }
 }
-
 
 
 
@@ -73,7 +73,8 @@ async function eraseKeep(keepId) {
               title="Full Send!">Erase</button>
 
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            <!-- <button type="button" class="btn btn-primary" @click="createVaultKeep()">Save
+              changes</button> -->
             <!-- <h2><i role="button" title="Update a Keep!" data-bs-toggle="modal" data-bs-target="#UpdateRecipeForm"
                 class="mdi mdi-plus-circle p-3"></i></h2> -->
           </div>

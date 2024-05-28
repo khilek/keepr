@@ -1,7 +1,16 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { Vault } from "../models/Vault.js";
+import { useRoute } from "vue-router";
+import { AppState } from "../AppState.js";
+
+
+// const props = defineProps({ vault: { type: Vault, required: true } })
+const route = useRoute()
+
+
 
 const theme = ref(loadState('theme') || 'light')
 
@@ -46,6 +55,13 @@ function toggleTheme() {
             data-bs-target="#VaultFormModal">
             CREATE VAULT
           </button>
+        </li>
+        <li>
+          <!-- <RouterLink :to="{ name: 'Vault', params: { vaultId: vaultId } }"
+            class="btn text-success lighten-30 selectable text-uppercase"> -->
+          Vault
+
+          <!-- </RouterLink> -->
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->

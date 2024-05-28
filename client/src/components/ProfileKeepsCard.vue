@@ -6,18 +6,16 @@ import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { useRoute } from "vue-router";
 import { AppState } from '../AppState.js';
+import { Keep } from "../models/Keep.js";
 
-
-
-
-
+const pk = computed(() => AppState.profileKeeps)
 const vaults = computed(() => AppState.activeVault)
 // const vaults = computed(() => AppState.activeVault)
-// const vaults = computed(() => AppState.vaults)
+// const vaults = computed(() => AppState.vaults)>
 const route = useRoute()
 
 
-defineProps({ vault: { type: Vault, required: true } })
+defineProps({ profileKeep: { type: Keep, required: true } })
 
 async function eraseVault(vaultId) {
   try {
@@ -41,12 +39,11 @@ async function eraseVault(vaultId) {
 
 
 <template>
-  <div v-if="vault" class="card ">
-    <img class="keep-img" :src="vault.img" :alt="vault.description">
-    <h3 class="bottom-left text-light fw-bold shadow rounded bg-dark ">
-      <RouterLink :to="{ name: 'Vault', params: { vaultId: vault.id } }">
-        {{ vault.name }}
-      </RouterLink>
+  <div class="card ">
+    <img class="keep-img" :src="profileKeep.img" :alt="profileKeep.description">
+    <h3 class="bottom-left text-light fw-bold shadow rounded bg-dark " role="button" data-bs-toggle="modal"
+      data-bs-target="#keepCardModal">
+      {{ profileKeep.name }}
       <div>
         <button @click="eraseVault(vaults.id)" class=" btn btn-outline-danger" title="Full Send!">Erase</button>
       </div>

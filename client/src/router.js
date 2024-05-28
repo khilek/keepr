@@ -17,6 +17,21 @@ const routes = [
     component: loadPage('AboutPage')
   },
   {
+    path: '/vaults/:vaultId',
+    name: 'Vault',
+    component: loadPage('VaultDetailsPage')
+  },
+  {
+    path: '/profiles/:profileId',
+    name: 'Profile',
+    component: loadPage('ProfilePage')
+  },
+  // {
+  //   path: '/vaults',
+  //   name: 'Vault',
+  //   component: loadPage('VaultsPage')
+  // },
+  {
     path: '/account',
     name: 'Account',
     component: loadPage('AccountPage'),

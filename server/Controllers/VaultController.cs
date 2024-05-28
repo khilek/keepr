@@ -32,7 +32,7 @@ public class VaultController : ControllerBase
     }
   }
 
-  [Authorize]
+
   [HttpGet("{vaultId}")]
   public ActionResult<Vault> GetVaultById(int vaultId)
   {

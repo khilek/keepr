@@ -5,8 +5,17 @@ CREATE TABLE IF NOT EXISTS accounts (
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
     name varchar(255) COMMENT 'User Name',
     email varchar(255) COMMENT 'User Email',
-    picture varchar(255) COMMENT 'User Picture'
+    picture varchar(255) COMMENT 'User Picture',
+    coverImg varchar(1000) NOT NULL
 ) default charset utf8mb4 COMMENT '';
+
+ALTER TABLE accounts ADD COLUMN coverImg TEXT;
+
+ALTER TABLE accounts DROP COLUMN coverImg;
+
+DROP TABLE accounts;
+
+DROP TABLE cars;
 
 CREATE TABLE IF NOT EXISTS keep (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -47,6 +56,14 @@ CREATE TABLE IF NOT EXISTS vaultkeep (
     FOREIGN KEY (keepId) REFERENCES keep (id) ON DELETE CASCADE,
     FOREIGN KEY (vaultId) REFERENCES vault (id) ON DELETE CASCADE
 )
+
+INSERT INTO
+    vaultkeep (keepId, vaultId, creatorId)
+VALUES (
+        22,
+        54,
+        "6616fce39bbe0efdcc07f907"
+    );
 
 SELECT vaultkeep.*, keep.*, accounts.*
 FROM

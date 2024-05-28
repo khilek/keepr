@@ -7,17 +7,14 @@ import Pop from "../utils/Pop.js";
 import { useRoute } from "vue-router";
 import { AppState } from '../AppState.js';
 
-
-
-
-
+const pv = computed(() => AppState.profileVaults)
 const vaults = computed(() => AppState.activeVault)
 // const vaults = computed(() => AppState.activeVault)
 // const vaults = computed(() => AppState.vaults)
 const route = useRoute()
 
 
-defineProps({ vault: { type: Vault, required: true } })
+defineProps({ profileVault: { type: Vault, required: true } })
 
 async function eraseVault(vaultId) {
   try {
@@ -41,11 +38,11 @@ async function eraseVault(vaultId) {
 
 
 <template>
-  <div v-if="vault" class="card ">
-    <img class="keep-img" :src="vault.img" :alt="vault.description">
+  <div class="card ">
+    <img class="keep-img" :src="profileVault.img" :alt="profileVault.description">
     <h3 class="bottom-left text-light fw-bold shadow rounded bg-dark ">
-      <RouterLink :to="{ name: 'Vault', params: { vaultId: vault.id } }">
-        {{ vault.name }}
+      <RouterLink :to="{ name: 'Vault', params: { vaultId: profileVault.id } }">
+        {{ profileVault.name }}
       </RouterLink>
       <div>
         <button @click="eraseVault(vaults.id)" class=" btn btn-outline-danger" title="Full Send!">Erase</button>

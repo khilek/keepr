@@ -5,8 +5,9 @@ import { Keep } from "../models/Keep.js";
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import { keepsService } from "../services/KeepsService.js";
+import { vaultKeepsService } from "../services/VaultKeepsService.js";
 
-
+const vk = computed(() => AppState.vaultKeeps)
 defineProps({ keep: { type: Keep, required: true } })
 
 async function getKeepById(keepId) {
@@ -19,6 +20,18 @@ async function getKeepById(keepId) {
   }
 }
 
+async function createVaultKeep(keepId) {
+  try {
+    await vaultKeepsService.createVaultKeep(keepId)
+  }
+  catch (error) {
+    Pop.toast("Couldn't Create VaultKeep", 'error')
+    logger.error(error)
+  }
+}
+
+
+
 </script>
 
 
@@ -27,8 +40,11 @@ async function getKeepById(keepId) {
     <img class="keep-img " :src="keep.img" :alt="keep.description" :title="keep.description">
     <div class="bottom-left text-light fw-bold shadow rounded bg-dark " role="button" data-bs-toggle="modal"
       data-bs-target="#keepCardModal" @click="getKeepById(keep.id)">{{ keep.name }}</div>
-    <img class="creator-img bottom-right" :src="keep.creator.picture" :title="keep.creator.name" alt="account image">
+    <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
+      <img class="creator-img bottom-right" :src="keep.creator.picture" :title="keep.creator.name" alt="account image">
+    </RouterLink>
   </div>
+
 </template>
 
 

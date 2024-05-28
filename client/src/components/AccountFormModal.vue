@@ -16,9 +16,8 @@ const accountData = ref({
   coverImg: '',
   bio: '',
   github: '',
-  linkedin: '',
-  class: '',
-  graduated: ''
+  linkedin: ''
+
 })
 
 
@@ -82,8 +81,7 @@ const accountData = ref({
           </div>
           <div class="mb-3 col-4">
             <label for="account-github">Github</label>
-            <input v-model="accountData.github" class="form-control" type="url" id="account-github" required
-              maxlength="500">
+            <input v-model="accountData.github" class="form-control" type="url" id="account-github" maxlength="500">
           </div>
           <div class="mb-3 col-4">
             <label for="account-linkedin">LinkedIn</label>
