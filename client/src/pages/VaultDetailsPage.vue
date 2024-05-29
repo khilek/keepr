@@ -8,12 +8,14 @@ import VaultCard from "../components/VaultCard.vue";
 import { useRoute } from "vue-router";
 import { Modal } from "bootstrap";
 import KeepsCard from "../components/KeepsCard.vue";
+import { router } from "../router.js";
+import { vaultKeepsService } from "../services/VaultKeepsService.js";
 
 const account = computed(() => AppState.account)
 const vault = computed(() => AppState.activeVault)
 const vks = computed(() => AppState.activeKIPV)
 // const vaults = computed(() => AppState.vaults)
-
+const vaultKeep = computed(() => AppState.vaultKeeps)
 
 const route = useRoute()
 
@@ -27,8 +29,15 @@ async function getVaultById() {
     await vaultsService.getVaultById(route.params.vaultId)
   }
   catch (error) {
-    Pop.toast("Couldn't Get Vaults By Id", 'error');
-    logger.error(error)
+    if (error.response.data.includes('😉')) {
+      router.push({ name: 'Home' })
+      Pop.toast("Couldn't Get Vaults By Id", 'error');
+
+    } else {
+
+      logger.error(error)
+
+    }
   }
 }
 
@@ -44,10 +53,29 @@ async function getKeepsInPubVault() {
 
 async function getKeepsInPrivVault() {
   try {
+
     await vaultsService.getKeepsInPrivVault(route.params.vaultId)
   }
   catch (error) {
+
     Pop.toast("Couldn't Get Keeps in Private Vault", 'error');
+    logger.error(error)
+  }
+}
+
+async function eraseVaultKeep(vaultKeepId) {
+  try {
+
+    const wantsToErase = await Pop.confirm('Are you sure you want to Erase?', 'There is no undoing this...', 'ERASE', "question")
+
+    if (!wantsToErase) return
+
+    logger.log('ERASING KEEP',)
+
+    await vaultKeepsService.eraseVaultKeep(vaultKeepId)
+
+  } catch (error) {
+    Pop.toast("Couldn't Erase VaultKeep")
     logger.error(error)
   }
 }
@@ -69,6 +97,7 @@ onMounted(() => {
     <section class="row d-flex ">
       <div class="col-4 p-3 mt-3 img-fluid " v-for="vk in vks" :key="vk.id">
         <KeepsCard :keep="vk" />
+        <button class="text-start w-25" @click="eraseVaultKeep(vk.vaultKeepId)"> Erase Vault Keep</button>
       </div>
     </section>
   </div>

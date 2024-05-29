@@ -18,18 +18,19 @@ const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId ==
 
 
 const vaultKeepFormData = ref({
-  vaultId: 0
+  vaultId: 0,
+  keepId: activeKeep.value.id
 })
 
 
 
 async function createVaultKeep() {
   try {
-    console.log(vaultKeepFormData.value, activeKeep.value.id)
+    console.log(vaultKeepFormData.value.vaultId, vaultKeepFormData.value.keepId)
+    vaultKeepFormData.value.keepId = activeKeep.value.id
     await vaultKeepsService.createVaultKeep(vaultKeepFormData.value)
-    vaultKeepFormData.value = {
-      vaultId: 0
-    }
+
+    Pop.success("VaultKeep Created!")
   }
   catch (error) {
     Pop.toast("Couldn't Create VaultKeep", 'error')

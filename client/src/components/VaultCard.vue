@@ -31,7 +31,7 @@ async function eraseVault(vaultId) {
     await vaultsService.eraseVault(vaultId)
 
   } catch (error) {
-    Pop.toast("Couldn't Erase Keep")
+    Pop.toast("Couldn't Erase Vault")
     logger.error(error)
   }
 }

@@ -9,9 +9,10 @@ class VaultKeepsService {
 
 
 
-  async createVaultKeep(vaultId, keepId) {
-    const response = await api.post("api/vaultkeeps", keepId)
-    logger.log("Getting VaultKeeps in Public Vault", response.data)
+  async createVaultKeep(vaultKeepFormData) {
+    console.log(vaultKeepFormData)
+    const response = await api.post("api/vaultkeeps", vaultKeepFormData)
+    logger.log("Creating VaultKeep", response.data)
     const newVK = new VaultKeep(response.data)
     if (AppState.activeKeep.id == newVK.vaultKeepId) {
       AppState.vaultKeeps.push(newVK)
@@ -22,11 +23,16 @@ class VaultKeepsService {
 
     newKept.kept++
 
-
-
   }
 
-
+  async eraseVaultKeep(vaultKeepId) {
+    const response = await api.delete(`api/vaultkeeps/${vaultKeepId}`)
+    logger.log("Erasing Vault", response.data)
+    const vk = AppState.vaultKeeps
+    const vaultKeepToIndex = vk.findIndex(vk => vk.vaultKeepId == vaultKeepId)
+    if (vaultKeepToIndex == -1) throw new Error("Couldn't Find Index")
+    vk.splice(vaultKeepToIndex, 1)
+  }
 
 
 

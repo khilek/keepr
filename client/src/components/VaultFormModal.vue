@@ -84,7 +84,7 @@ async function createVault() {
             </div>
             <div class="form-check form-switch">
               <input v-model="vaultData.isPrivate" class="form-check-input" type="checkbox" role="switch"
-                id="vaultIsPrivate" required>
+                id="vaultIsPrivate">
               <label class="form-check-label" for="vaultIsPrivate">Make A Private Vault?</label>
             </div>
 
