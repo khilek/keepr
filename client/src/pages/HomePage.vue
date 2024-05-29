@@ -65,6 +65,7 @@ onMounted(() => {
 .masonry {
   columns: 300px;
   column-gap: .5em;
+
 }
 
 .masonry>* {

@@ -8,6 +8,14 @@ import { useRoute } from "vue-router";
 import { keepsService } from "../services/KeepsService.js";
 import { Keep } from "../models/Keep.js";
 import { vaultKeepsService } from "../services/VaultKeepsService.js";
+import VaultKeepForm from "./VaultKeepForm.vue";
+
+
+
+
+
+
+
 
 const vk = computed(() => AppState.vaultKeeps)
 defineProps({ keep: { type: Keep, required: true } })
@@ -31,6 +39,7 @@ async function eraseKeep(keepId) {
     logger.error(error)
   }
 }
+
 
 
 
@@ -62,9 +71,10 @@ async function eraseKeep(keepId) {
                 <p> {{ activeKeep.description }}</p>
               </div>
             </div>
-            <p class="text-end "><img class="me-2 creator-img" :src="activeKeep.creator.picture" alt="creator image">{{
+            <p class="text-end "> <img class="me-2 creator-img" :src="activeKeep.creator.picture" alt="creator image">{{
               activeKeep.creator.name }}
             </p>
+            <VaultKeepForm />
           </div>
         </div>
         <div class="modal-footer">
@@ -82,6 +92,7 @@ async function eraseKeep(keepId) {
       </div>
     </div>
   </div>
+
 </template>
 
 

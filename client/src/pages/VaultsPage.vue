@@ -28,7 +28,7 @@ const route = useRoute()
 
 <template>
   <div v-for="vault in vaults" :key="vault.id"> </div>
-  <VaultCard :vault="vault" />
+  <!-- <VaultCard :vault="vault" /> -->
 </template>
 
 

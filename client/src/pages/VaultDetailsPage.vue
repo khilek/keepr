@@ -42,6 +42,16 @@ async function getKeepsInPubVault() {
   }
 }
 
+async function getKeepsInPrivVault() {
+  try {
+    await vaultsService.getKeepsInPrivVault(route.params.vaultId)
+  }
+  catch (error) {
+    Pop.toast("Couldn't Get Keeps in Private Vault", 'error');
+    logger.error(error)
+  }
+}
+
 onMounted(() => {
   getVaultById()
   getKeepsInPubVault()
@@ -62,7 +72,7 @@ onMounted(() => {
       </div>
     </section>
   </div>
-
+  <KeepCardModal />
 </template>
 
 

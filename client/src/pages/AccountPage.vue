@@ -21,22 +21,22 @@ const route = useRoute()
 
 
 
-async function getVaultById() {
-  try {
-    console.log(route.params.vaultId)
-    await vaultsService.getVaultById(route.params.vaultId)
-  } catch (error) {
-    Pop.toast("Couldn't Get Vaults By Id", 'error');
-    logger.error(error)
-  }
-}
+// async function getVaultById() {
+//   try {
+//     console.log(route.params.vaultId)
+//     await vaultsService.getVaultById(route.params.vaultId)
+//   } catch (error) {
+//     Pop.toast("Couldn't Get Vaults By Id", 'error');
+//     logger.error(error)
+//   }
+// }
 
 
 
 
-onMounted(() => {
-  getVaultById()
-})
+// onMounted(() => {
+//   getVaultById()
+// })
 
 
 </script>
@@ -50,7 +50,7 @@ onMounted(() => {
       </div> -->
     </section>
   </div>
-  <button @click="getVaultById()"></button>
+  <!-- <button @click="getVaultById()"></button> -->
 
   <div class="about text-center">
     <div v-if="account">

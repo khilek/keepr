@@ -9,5 +9,6 @@ export class Keep {
     this.views = data.views
     this.creatorId = data.creatorId
     this.creator = data.creator
+    this.kept = data.kept
   }
 }

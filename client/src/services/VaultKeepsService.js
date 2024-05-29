@@ -8,12 +8,22 @@ class VaultKeepsService {
 
 
 
-  async createVaultKeep(keepId, vaultId) {
 
-    const response = await api.post("api/vaultkeeps")
+  async createVaultKeep(vaultId, keepId) {
+    const response = await api.post("api/vaultkeeps", keepId)
     logger.log("Getting VaultKeeps in Public Vault", response.data)
-    const vk = response.data.map(vk => new VaultKeep(vk))
-    AppState.vaultKeeps = vk
+    const newVK = new VaultKeep(response.data)
+    if (AppState.activeKeep.id == newVK.vaultKeepId) {
+      AppState.vaultKeeps.push(newVK)
+    }
+    const newKept = AppState.keeps.find(kept => kept.id == newVK.keepId)
+
+    if (!newKept) { return }
+
+    newKept.kept++
+
+
+
   }
 
 
