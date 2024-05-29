@@ -71,4 +71,28 @@ FROM
     JOIN keep ON vaultkeep.keepId = keep.id
     JOIN accounts on accounts.id = vaultkeep.creatorId
 WHERE
-    vaultkeep.vaultId = 51
+    vaultkeep.vaultId = 51;
+
+SELECT vaultkeep.*, COUNT(vaultkeep.id) AS kept, accounts.*
+FROM
+    vaultkeep
+    JOIN accounts ON vaultkeep.creatorId = accounts.id
+    LEFT JOIN keep ON vaultkeep.keepId = vaultkeep.id
+GROUP BY (vaultkeep.id);
+
+-- SELECT
+-- keep.*,
+-- COUNT(vaultkeep.id) AS kept,
+-- accounts.*
+-- FROM
+--     keep
+--     JOIN accounts ON keep.creatorId = accounts.id
+--     LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
+-- GROUP BY (keep.id)
+
+SELECT keep.*, COUNT(vaultkeep.id) AS kept, accounts.*
+FROM
+    keep
+    JOIN accounts ON keep.creatorId = accounts.id
+    LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
+GROUP BY (keep.id)

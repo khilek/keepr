@@ -5,6 +5,8 @@
 
 
 
+using Microsoft.Extensions.Hosting.Internal;
+
 namespace keepr.Repositories;
 
 public class KeepRepository
@@ -42,11 +44,15 @@ public class KeepRepository
   internal List<Keep> GetAllKeeps()
   {
     string sql = @"
-    SELECT
-    keep.*,
-    accounts.*
-    FROM keep
-    JOIN accounts ON keep.creatorId = accounts.id;";
+    SELECT 
+keep.*, 
+COUNT(vaultkeep.id) AS kept,
+accounts.*
+FROM keep
+JOIN accounts ON keep.creatorId = accounts.id
+    LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
+GROUP BY (keep.id);";
+
 
     List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, PopulateCreator).ToList();
     return keeps;

@@ -39,7 +39,7 @@ public class VaultService
   internal Vault GetVaultById(int vaultId)
   {
     Vault vault = _repository.GetVaultById(vaultId);
-    if (vault == null)
+    if (vault.IsPrivate != false)
     {
       throw new Exception($"Invalid id: {vaultId}");
     }
