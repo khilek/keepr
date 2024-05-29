@@ -6,10 +6,12 @@ public class AccountController : ControllerBase
 {
   private readonly AccountService _accountService;
   private readonly Auth0Provider _auth0Provider;
+  private readonly VaultService _vaultService;
 
-  public AccountController(AccountService accountService, Auth0Provider auth0Provider)
+  public AccountController(AccountService accountService, VaultService vaultService, Auth0Provider auth0Provider)
   {
     _accountService = accountService;
+    _vaultService = vaultService;
     _auth0Provider = auth0Provider;
   }
 
@@ -27,4 +29,25 @@ public class AccountController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+
+  [Authorize]
+  [HttpGet("{vaults}")]
+  public async Task<ActionResult<List<Vault>>> GetAccountsVaults(int vaultId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      List<Vault> vaults = _vaultService.GetAccountsVaults(userInfo.Id, vaultId);
+      return Ok(vaults);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
+
+
+
+
 }

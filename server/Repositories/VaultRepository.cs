@@ -1,3 +1,6 @@
+
+using System.Reflection.Metadata.Ecma335;
+
 namespace keepr.Repositories;
 
 public class VaultRepository
@@ -72,5 +75,23 @@ public class VaultRepository
     string sql = "DELETE FROM vault WHERE id = @vaultId;";
 
     _db.Execute(sql, new { vaultId });
+  }
+
+  internal List<Vault> GetAccountsVaults(string userId, int vaultId)
+  {
+    string sql = @"
+    SELECT 
+    vault.*,
+    accounts.*
+    FROM vault
+    JOIN accounts ON accounts.id = vault.creatorId
+    WHERE vault.creatorId = @userId;";
+    List<Vault> vaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+    {
+      vault.Creator = profile;
+      return vault;
+    }, new { userId, vaultId }).ToList();
+
+    return vaults;
   }
 }

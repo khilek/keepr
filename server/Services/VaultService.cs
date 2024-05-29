@@ -1,5 +1,6 @@
 
 
+
 namespace keepr.Services;
 
 public class VaultService
@@ -27,6 +28,12 @@ public class VaultService
     }
     _repository.EraseVault(vaultId);
     return "VAULT has been ERASED";
+  }
+
+  internal List<Vault> GetAccountsVaults(string userId, int vaultId)
+  {
+    List<Vault> vaults = _repository.GetAccountsVaults(userId, vaultId);
+    return vaults;
   }
 
   internal Vault GetVaultById(int vaultId)
