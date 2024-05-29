@@ -68,4 +68,15 @@ public class KeepService
 
 
   }
+
+  internal Keep IncrementViews(int keepId)
+  {
+    _repository.IncrementViews(keepId);
+
+    Keep keep = GetKeepById(keepId);
+
+    return keep;
+  }
+
+
 }

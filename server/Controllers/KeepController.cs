@@ -51,6 +51,8 @@ public class KeepController : ControllerBase
     try
     {
       Keep keep = _keepService.GetKeepById(keepId);
+      _keepService.IncrementViews(keepId);
+      keep.Views++;
       return Ok(keep);
     }
     catch (Exception exception)

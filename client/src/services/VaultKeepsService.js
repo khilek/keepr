@@ -28,7 +28,7 @@ class VaultKeepsService {
   async eraseVaultKeep(vaultKeepId) {
     const response = await api.delete(`api/vaultkeeps/${vaultKeepId}`)
     logger.log("Erasing Vault", response.data)
-    const vk = AppState.vaultKeeps
+    const vk = AppState.activeKIPV
     const vaultKeepToIndex = vk.findIndex(vk => vk.vaultKeepId == vaultKeepId)
     if (vaultKeepToIndex == -1) throw new Error("Couldn't Find Index")
     vk.splice(vaultKeepToIndex, 1)

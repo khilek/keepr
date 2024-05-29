@@ -4,6 +4,7 @@
 
 
 
+
 namespace keepr.Repositories;
 
 public class KeepRepository
@@ -113,5 +114,12 @@ public class KeepRepository
       return vk;
     }, new { vaultId }).ToList();
     return vaultKeeps;
+  }
+
+  internal void IncrementViews(int keepId)
+  {
+    string sql = @"UPDATE keep SET views = views + 1 WHERE id = @keepId LIMIT 1;";
+
+    _db.Execute(sql, new { keepId });
   }
 }

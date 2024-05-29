@@ -29,7 +29,7 @@ async function getVaultById() {
     await vaultsService.getVaultById(route.params.vaultId)
   }
   catch (error) {
-    if (error.response.data.includes('😉')) {
+    if (error.response.data.includes(vault.value.isPrivate)) {
       router.push({ name: 'Home' })
       Pop.toast("Couldn't Get Vaults By Id", 'error');
 
