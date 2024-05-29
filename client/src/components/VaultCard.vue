@@ -47,7 +47,7 @@ async function eraseVault(vaultId) {
       <RouterLink :to="{ name: 'Vault', params: { vaultId: vault.id } }">
         {{ vault.name }}
       </RouterLink>
-      <div v-if="vaults == vault.creator">
+      <div v-if="vault.creatorId === AppState.account?.id">
         <button @click="eraseVault(vaults.id)" class=" btn btn-outline-danger" title="Full Send!">Erase</button>
       </div>
     </h3>
