@@ -1,4 +1,6 @@
 
+
+
 namespace keepr.Repositories;
 
 public class VaultKeepRepository
@@ -36,14 +38,19 @@ public class VaultKeepRepository
     return vaultKeep;
   }
 
+  internal void EraseVaultKeep(int vaultKeepId)
+  {
+    string sql = "DELETE FROM vaultkeep WHERE id = @vaultKeepId LIMIT 1";
 
+    int rowsAffected = _db.Execute(sql, new { vaultKeepId });
+  }
 
+  internal VaultKeepRelationship GetVaultKeepById(int vaultKeepId)
+  {
+    string sql = "SELECT * FROM vaultkeep WHERE id = @vaultKeepId;";
 
+    VaultKeepRelationship vaultKeepRelationship = _db.Query<VaultKeepRelationship>(sql, new { vaultKeepId }).FirstOrDefault();
 
-
-
-
-
-
-
+    return vaultKeepRelationship;
+  }
 }

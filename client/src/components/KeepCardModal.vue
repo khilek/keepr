@@ -79,8 +79,8 @@ async function eraseKeep(keepId) {
         </div>
         <div class="modal-footer">
           <div class="text-start w-100 d-flex justify-content-between">
-            <button @click="eraseKeep(AppState.activeKeep.id)" class=" btn btn-outline-danger"
-              title="Full Send!">Erase</button>
+            <button v-if="activeKeep.creatorId === AppState.account?.id" @click="eraseKeep(AppState.activeKeep.id)"
+              class=" btn btn-outline-danger" title="Full Send!">Erase</button>
 
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <!-- <button type="button" class="btn btn-primary" @click="createVaultKeep()">Save
