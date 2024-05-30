@@ -4,10 +4,11 @@ namespace keepr.Services;
 public class ProfileService
 {
   private readonly ProfileRepository _repository;
-
-  public ProfileService(ProfileRepository repository)
+  private readonly VaultService _vaultService;
+  public ProfileService(ProfileRepository repository, VaultService vaultService)
   {
     _repository = repository;
+    _vaultService = vaultService;
   }
 
   internal Profile GetAUsersProfile(string profileId)
@@ -29,8 +30,9 @@ public class ProfileService
 
   internal List<Vault> GetAUsersProfileVaults(string profileId)
   {
+
     List<Vault> vaults = _repository.GetAUsersProfileVaults(profileId);
 
-    return vaults;
+    return vaults.FindAll(vault => vault.IsPrivate == false);
   }
 }

@@ -13,6 +13,10 @@ public class VaultKeepService
   internal VaultKeep CreateVaultKeep(int vaultId, int keepId, Profile userInfo)
   {
     VaultKeep vaultKeeps = _repository.CreateVaultKeep(vaultId, keepId, userInfo.Id);
+    if (userInfo.Id != vaultKeeps.CreatorId)
+    {
+      throw new Exception("FAIL");
+    }
     return vaultKeeps;
   }
 
@@ -28,8 +32,6 @@ public class VaultKeepService
 
     return "NO LONGER A VAULTKEEP";
   }
-
-
 
 
   internal VaultKeepRelationship GetVaultKeepById(int vaultKeepId)

@@ -3,10 +3,11 @@ namespace keepr.Services;
 public class KeepService
 {
   private readonly KeepRepository _repository;
-
-  public KeepService(KeepRepository repository)
+  private readonly VaultService _vaultService;
+  public KeepService(KeepRepository repository, VaultService vaultService)
   {
     _repository = repository;
+    _vaultService = vaultService;
   }
 
   internal Keep CreateKeep(Keep keepData)
@@ -44,7 +45,8 @@ public class KeepService
 
   internal List<VaultKeepRelationship> GetKeepsInVault(int vaultId, string userId)
   {
-    // TODO this will need to check the vault and the user to know if you can get the keeps
+
+    _vaultService.GetVaultById(vaultId, userId);
     List<VaultKeepRelationship> keeps = _repository.GetKeepsInVault(vaultId);
 
     return keeps;
