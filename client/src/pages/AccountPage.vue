@@ -64,6 +64,7 @@ onMounted(() => {
       </div>
     </div>
     <section class="row">
+      <h1 class="mb-3 p-3 text-center">My Vaults</h1>
       <div class="col-4" v-for="vault in vaults" :key="vault.id">
         <VaultCard :vault="vault" />
       </div>

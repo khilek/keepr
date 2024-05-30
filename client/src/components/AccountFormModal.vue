@@ -62,7 +62,7 @@ async function saveAccount() {
                 required maxlength="25" />
             </div>
             <div class="mb-3 col-4">
-              <label for="account-name">Email</label>
+              <label for="account-email">Email</label>
               <input v-model="accountData.email" class="form-control" type="text" id="account-email" minlength="3"
                 required maxlength="25" />
             </div>
@@ -82,17 +82,12 @@ async function saveAccount() {
             <div class="mb-3 col-6 d-flex align-items-end justify-content-end">
               <button class="btn btn-success w-50">Save <i class="mdi mdi-floppy"></i></button>
             </div>
-
           </form>
-
-
-
-
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

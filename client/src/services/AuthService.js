@@ -4,7 +4,11 @@ import { audience, clientId, domain } from '../env'
 import { accountService } from './AccountService'
 import { api } from './AxiosService'
 import { socketService } from './SocketService'
+import { vaultsService } from "./VaultsService.js"
+import Pop from "../utils/Pop.js"
+import { useRoute } from "vue-router"
 
+const route = useRoute()
 
 export const AuthService = initialize({
   domain,
@@ -22,7 +26,12 @@ AuthService.on(AUTH_EVENTS.AUTHENTICATED, async function () {
   await accountService.getAccount()
   socketService.authenticate(AuthService.bearer)
   // NOTE if there is something you want to do once the user is authenticated, place that here
-  // TODO go get my vaults whenever I login (help reviews)
+  try {
+    await accountService.getAccountVaults()
+  }
+  catch (error) {
+    Pop.error(error);
+  }
 })
 
 async function refreshAuthToken(config) {
