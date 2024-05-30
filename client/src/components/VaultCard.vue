@@ -44,12 +44,14 @@ async function eraseVault(vaultId) {
 <template>
   <div v-if="vault" class="card mb-3">
     <img class="keep-img" :src="vault.img" :alt="vault.description">
-    <h3 class="bottom-left text-light fw-bold shadow rounded bg-dark ">
-      <RouterLink :to="{ name: 'Vault', params: { vaultId: vault.id } }">
+    <h3 class="bottom-left text-light fw-bold shadow rounded text-center ">
+      <RouterLink :title="vault.name" :to="{ name: 'Vault', params: { vaultId: vault.id } }">
         {{ vault.name }}
       </RouterLink>
-      <div v-if="vault.creatorId === AppState.account?.id">
-        <button @click="eraseVault(vault.id)" class=" btn btn-outline-danger" title="Full Send!">Erase</button>
+      <p :title="vault.creator.name">by {{ vault.creator.name }}</p>
+      <div class="text-start w-100" v-if="vault.creatorId === AppState.account?.id">
+        <button @click="eraseVault(vault.id)" class=" btn btn-outline-danger rounded rounded-pill"
+          title="Full Send Delete!"><i class="mdi mdi-delete-outline"></i></button>
       </div>
     </h3>
   </div>

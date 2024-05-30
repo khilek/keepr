@@ -75,11 +75,11 @@ onMounted(() => {
 
 <template>
 
-  <div class="container-fluid">
+  <div class="container">
     <section v-if="profile" class="row">
-      <img class="cover-img" :src="profile.coverImg" alt="">
+      <img class="cover-img mt-3" :src="profile.coverImg" alt="">
       <div class="col text-center">
-        <img class="profile-img" :src="profile.picture" alt="">
+        <img class="profile-img rounded-5" :src="profile.picture" alt="">
       </div>
     </section>
     <section v-if="profile" class="row">

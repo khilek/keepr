@@ -55,8 +55,9 @@ onMounted(() => {
 
     <div class="about text-center">
       <div v-if="account">
+        <img class="cover-img" :src="account.coverImg" alt="">
         <h1>Welcome {{ account.name }}</h1>
-        <img class="rounded" :src="account.picture" alt="" />
+        <img class="rounded profile-img" :src="account.picture" alt="" />
         <p>{{ account.email }}</p>
       </div>
       <div v-else>
@@ -76,23 +77,35 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-img {
-  max-width: 100px;
-}
-
+// img {
+//   max-width: 100px;
+// }
 
 .cover-img {
   width: 100%;
-  height: 20vh;
-  margin-bottom: -10vh;
+  height: 35vh;
   object-fit: cover;
-  object-position: center;
+  position: center;
 }
 
 .profile-img {
-  height: 100px;
   width: 100px;
+  height: 100px;
   object-fit: cover;
-  object-position: center;
+  position: center;
 }
-</style>
+
+// .cover-img {
+//   width: 100%;
+//   height: 20vh;
+//   margin-bottom: -10vh;
+//   object-fit: cover;
+//   object-position: center;
+// }
+
+// .profile-img {
+//   height: 100px;
+//   width: 100px;
+//   object-fit: cover;
+//   object-position: center;
+// }</style>
