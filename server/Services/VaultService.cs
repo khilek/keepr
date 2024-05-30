@@ -40,6 +40,8 @@ public class VaultService
   {
     Vault vault = _repository.GetVaultById(vaultId);
     //TODO Reference restaurants for checks on private - 
+
+
     if (vault.IsPrivate == true && vault.CreatorId != userId)
     {
       throw new Exception($"Invalid id: {vaultId} 😉");
