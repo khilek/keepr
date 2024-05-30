@@ -6,6 +6,7 @@ import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
 import VaultCard from "../components/VaultCard.vue";
 import { useRoute } from "vue-router";
+import { accountService } from "../services/AccountService.js";
 
 const account = computed(() => AppState.account)
 const activeVaults = computed(() => AppState.activeVault)
@@ -21,22 +22,22 @@ const route = useRoute()
 
 
 
-// async function getVaultById() {
-//   try {
-//     console.log(route.params.vaultId)
-//     await vaultsService.getVaultById(route.params.vaultId)
-//   } catch (error) {
-//     Pop.toast("Couldn't Get Vaults By Id", 'error');
-//     logger.error(error)
-//   }
-// }
+async function getAccountVaults() {
+  try {
+
+    await accountService.getAccountVaults()
+  } catch (error) {
+    Pop.toast("Couldn't Get Account Vaults", 'error');
+    logger.error(error)
+  }
+}
 
 
 
 
-// onMounted(() => {
-//   getVaultById()
-// })
+onMounted(() => {
+  getAccountVaults()
+})
 
 
 </script>
@@ -44,28 +45,31 @@ const route = useRoute()
 <template>
 
   <div class="container">
-    <section class="row">
-      <!-- <div class="col-12" v-for="activeVault in activeVaults" :key="activeVault.id">
-        <VaultCard :activeVault="activeVault" />
-      </div> -->
+    <section class="row justify-content-center">
+      <div class="col-1 m-3 p-3 ">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AccountFormModal">
+          Account Details
+        </button>
+      </div>
     </section>
-  </div>
-  <!-- <button @click="getVaultById()"></button> -->
 
-  <div class="about text-center">
-    <div v-if="account">
-      <h1>Welcome {{ account.name }}</h1>
-      <img class="rounded" :src="account.picture" alt="" />
-      <p>{{ account.email }}</p>
+    <div class="about text-center">
+      <div v-if="account">
+        <h1>Welcome {{ account.name }}</h1>
+        <img class="rounded" :src="account.picture" alt="" />
+        <p>{{ account.email }}</p>
+      </div>
+      <div v-else>
+        <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
+      </div>
     </div>
-    <div v-else>
-      <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
-    </div>
-  </div>
+    <section class="row">
+      <div class="col-4" v-for="vault in vaults" :key="vault.id">
+        <VaultCard :vault="vault" />
+      </div>
+    </section>
 
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AccountFormModal">
-    Launch demo modal
-  </button>
+  </div>
   <AccountFormModal />
 
 </template>

@@ -29,8 +29,7 @@ async function getVaultById() {
     await vaultsService.getVaultById(route.params.vaultId)
   }
   catch (error) {
-    // FIXME check your error message sent back by the API
-    if (error.response.data.includes(vault.value.isPrivate)) {
+    if (error.response.data.includes('😉')) {
       router.push({ name: 'Home' })
       Pop.toast("Couldn't Get Vaults By Id", 'error');
 
@@ -98,7 +97,8 @@ onMounted(() => {
     <section class="row d-flex ">
       <div class="col-4 p-3 mt-3 img-fluid " v-for="vk in vks" :key="vk.id">
         <KeepsCard :keep="vk" />
-        <button class="text-start w-25" @click="eraseVaultKeep(vk.vaultKeepId)"> Erase Vault Keep</button>
+        <button class="text-start w-25 rounded rounded-pill text-danger text-center"
+          @click="eraseVaultKeep(vk.vaultKeepId)" title="FULL SEND!"> <i class="mdi mdi-delete"></i></button>
       </div>
     </section>
   </div>

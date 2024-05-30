@@ -6,6 +6,7 @@ import { logger } from "../utils/Logger.js";
 import { useRoute } from "vue-router";
 import { vaultKeepsService } from "../services/VaultKeepsService.js";
 import { Keep } from "../models/Keep.js";
+import { Modal } from "bootstrap";
 
 defineProps({ keep: { type: Keep, required: true } })
 
@@ -31,7 +32,7 @@ async function createVaultKeep() {
     console.log(vaultKeepFormData.value.vaultId, vaultKeepFormData.value.keepId)
     vaultKeepFormData.value.keepId = activeKeep.value.id
     await vaultKeepsService.createVaultKeep(vaultKeepFormData.value)
-
+    Modal.getOrCreateInstance('#vaultKeepForm').hide
     Pop.success("VaultKeep Created!")
   }
   catch (error) {
@@ -48,12 +49,15 @@ async function createVaultKeep() {
 
 <template>
   <form @submit.prevent="createVaultKeep()">
-    <select v-model="vaultKeepFormData.vaultId" class="form-select mb-3" aria-label="Default select example" required>
-      <option v-for="myVault in myVaults" :key="myVault.id" :value="myVault.id">
-        {{ myVault.name }}
-      </option>
-    </select>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="col-6 text-center">
+      <select id="vaultKeepForm" v-model="vaultKeepFormData.vaultId" class="form-select mb-3"
+        aria-label="Default select example" required>
+        <option v-for="vault in vaults" :key="vault.id" :value="vault.id">
+          {{ vault.name }}
+        </option>
+      </select>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </template>
 

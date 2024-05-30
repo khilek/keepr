@@ -56,18 +56,20 @@ async function eraseKeep(keepId) {
   <div class="modal fade" id="keepCardModal" tabindex="-1" aria-labelledby="keepCardModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content" v-if="activeKeep">
-        <div class="modal-header ">
-          <h1 class="modal-title fs-5" id="keepCardModalLabel">{{ activeKeep.name }} </h1>
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 " id="keepCardModalLabel"><i class="mdi mdi-eye"></i> {{
+            activeKeep.views }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-0">
           <div class="container-fluid">
             <div class="row">
               <div class="col-6 col-md-6">
-                <img class="img-fluid rounded" :src="activeKeep.img" alt="Recipe-Image">
+                <img class="img-fluid rounded" :src="activeKeep.img" :alt="activeKeep.description"
+                  :title="activeKeep.description">
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center flex-column align-items-center">
-                <i class="mdi mdi-eye">{{ activeKeep.views }}</i>
+
                 <h2 class="fw-bolder fs-1">{{ activeKeep.name }}</h2>
                 <p> {{ activeKeep.description }}</p>
               </div>
