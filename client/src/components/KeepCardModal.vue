@@ -3,7 +3,6 @@ import { computed, onMounted } from "vue";
 import { AppState } from "../AppState.js";
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
-
 import { useRoute } from "vue-router";
 import { keepsService } from "../services/KeepsService.js";
 import { Keep } from "../models/Keep.js";
@@ -57,19 +56,19 @@ async function eraseKeep(keepId) {
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content" v-if="activeKeep">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="keepCardModalLabel"><i class="mdi mdi-eye"></i> {{
-            activeKeep.views }} <i class="mdi mdi-pin-outline"></i>{{ activeKeep.views }}
+          <h1 class="modal-title fs-5" id="keepCardModalLabel"><i class="mdi mdi-eye" title="VIEWS"></i> {{
+            activeKeep.views }} <i class="mdi mdi-pin-outline" title="KEPT"></i>{{ activeKeep.views }}
           </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-0">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-6 col-md-6">
+              <div class="col-12 col-md-6">
                 <img class="img-fluid rounded" :src="activeKeep.img" :alt="activeKeep.description"
                   :title="activeKeep.description">
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center flex-column align-items-center">
+              <div class="col-12 col-md-6  d-flex justify-content-center flex-column align-items-center">
 
                 <h2 class="fw-bolder fs-1">{{ activeKeep.name }}</h2>
                 <p> {{ activeKeep.description }}</p>

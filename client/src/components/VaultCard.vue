@@ -64,6 +64,11 @@ async function eraseVault(vaultId) {
 
 }
 
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
 
 .bottom-left {
   position: absolute;

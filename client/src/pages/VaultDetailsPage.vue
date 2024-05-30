@@ -98,8 +98,8 @@ onMounted(() => {
       <div class="col-4 p-3 mt-3 img-fluid " v-for="vk in vks" :key="vk.id">
         <KeepsCard :keep="vk" />
         <button v-if="vk.creatorId === AppState.account?.id"
-          class="text-start w-25 rounded rounded-pill text-danger text-center" @click="eraseVaultKeep(vk.vaultKeepId)"
-          title="FULL SEND!"> <i class="mdi mdi-delete"></i></button>
+          class="text-start w-25 rounded rounded-pill bg-danger text-dark text-center"
+          @click="eraseVaultKeep(vk.vaultKeepId)" title="FULL SEND DELETE!"> <i class="mdi mdi-delete"></i></button>
       </div>
     </section>
   </div>
@@ -112,6 +112,11 @@ onMounted(() => {
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
 
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
 }
 </style>
