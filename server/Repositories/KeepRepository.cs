@@ -68,6 +68,7 @@ GROUP BY (keep.id);";
         FROM keep
         JOIN accounts ON accounts.id = keep.creatorId
         LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
+        WHERE keep.id = @keepId
         GROUP BY (keep.id);";
 
     Keep keep = _db.Query<Keep, Profile, Keep>(sql, PopulateCreator, new { keepId }).FirstOrDefault();

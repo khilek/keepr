@@ -109,16 +109,14 @@ FROM
     keep
     JOIN accounts ON accounts.id = keep.creatorId
     LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
+WHERE
+    keep.id = 159
 GROUP BY (keep.id);
 
-WHERE keep.id = @keepId;
-
-";
-
-
-            string sql = @"
-SELECT keep.*, accounts.*
-FROM keep
-    JOIN accounts ON accounts.id = keep.creatorId
-WHERE
-    keep.id = @keepId;
+string sql = @"
+        SELECT
+        keep.*,
+        accounts.*
+        FROM keep
+        JOIN accounts ON accounts.id = keep.creatorId
+        WHERE keep.id = @keepId;";
