@@ -70,7 +70,7 @@ async function eraseVaultKeep(vaultKeepId) {
 
     if (!wantsToErase) return
 
-    logger.log('ERASING KEEP',)
+    logger.log('ERASING VAULTKEEP', vaultKeepId)
 
     await vaultKeepsService.eraseVaultKeep(vaultKeepId)
 
@@ -97,8 +97,9 @@ onMounted(() => {
     <section class="row d-flex ">
       <div class="col-4 p-3 mt-3 img-fluid " v-for="vk in vks" :key="vk.id">
         <KeepsCard :keep="vk" />
-        <button class="text-start w-25 rounded rounded-pill text-danger text-center"
-          @click="eraseVaultKeep(vk.vaultKeepId)" title="FULL SEND!"> <i class="mdi mdi-delete"></i></button>
+        <button v-if="vk.creatorId === AppState.account?.id"
+          class="text-start w-25 rounded rounded-pill text-danger text-center" @click="eraseVaultKeep(vk.vaultKeepId)"
+          title="FULL SEND!"> <i class="mdi mdi-delete"></i></button>
       </div>
     </section>
   </div>
