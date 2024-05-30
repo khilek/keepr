@@ -42,7 +42,7 @@ public class KeepService
     return keep;
   }
 
-  internal List<VaultKeepRelationship> GetKeepsInVault(int vaultId)
+  internal List<VaultKeepRelationship> GetKeepsInVault(int vaultId, string userId)
   {
     // TODO this will need to check the vault and the user to know if you can get the keeps
     List<VaultKeepRelationship> keeps = _repository.GetKeepsInVault(vaultId);
