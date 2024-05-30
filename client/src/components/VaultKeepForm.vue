@@ -12,8 +12,10 @@ defineProps({ keep: { type: Keep, required: true } })
 const route = useRoute()
 const activeKeep = computed(() => AppState.activeKeep)
 
+// FIXME don't filter the array of vaults, you will need a seperate array of vaults for the logged in user, and you just need to compute that value in
 const myVaults = computed(() => AppState.profileVaults.filter(vault => vault.creatorId == AppState.account?.id))
 
+// FIXME don't filter the array of vaults, you will need a seperate array of vaults for the logged in user, and you just need to compute that value in
 const vaults = computed(() => AppState.vaults.filter(vault => vault.creatorId == AppState.account?.id))
 
 

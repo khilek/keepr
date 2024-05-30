@@ -21,12 +21,13 @@ defineProps({ vault: { type: Vault, required: true } })
 
 async function eraseVault(vaultId) {
   try {
+    // FIXME log your vaultId parameter and make sure it is not undefined
 
     const wantsToErase = await Pop.confirm('Are you sure you want to Erase?', 'There is no undoing this...', 'ERASE', "question")
 
     if (!wantsToErase) return
 
-    logger.log('ERASING KEEP', vaultId)
+    logger.log('ERASING VAULT', vaultId)
 
     await vaultsService.eraseVault(vaultId)
 

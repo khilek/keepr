@@ -15,11 +15,12 @@ const vaultData = ref({
   name: '',
   description: '',
   img: '',
-  isPrivate: ''
+
+  isPrivate: false
 })
 
 function resetForm() {
-  vaultData.value = { name: '', description: '', img: '', isPrivate: '' }
+  vaultData.value = { name: '', description: '', img: '', isPrivate: false }
 }
 
 async function createVault() {
@@ -31,7 +32,7 @@ async function createVault() {
       name: '',
       description: '',
       img: '',
-      isPrivate: ''
+      isPrivate: false
     }
 
     Modal.getOrCreateInstance('#VaultFormModal').hide()

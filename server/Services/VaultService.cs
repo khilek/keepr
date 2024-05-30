@@ -20,7 +20,7 @@ public class VaultService
 
   internal string EraseVault(int vaultId, string userId)
   {
-    Vault VaultToErase = GetVaultById(vaultId);
+    Vault VaultToErase = GetVaultById(vaultId, userId);
 
     if (VaultToErase.CreatorId != userId)
     {
@@ -36,19 +36,20 @@ public class VaultService
     return vaults;
   }
 
-  internal Vault GetVaultById(int vaultId)
+  internal Vault GetVaultById(int vaultId, string userId)
   {
     Vault vault = _repository.GetVaultById(vaultId);
-    if (vault.IsPrivate != false)
+    //TODO Reference restaurants for checks on private - 
+    if (vault.IsPrivate == true && vault.CreatorId != userId)
     {
-      throw new Exception($"Invalid id: {vaultId}");
+      throw new Exception($"Invalid id: {vaultId} 😉");
     }
     return vault;
   }
 
   internal Vault UpdateVault(int vaultId, string userId, Vault vaultData)
   {
-    Vault VaultToUpdate = GetVaultById(vaultId);
+    Vault VaultToUpdate = GetVaultById(vaultId, userId);
     if (VaultToUpdate.CreatorId != userId)
     {
       throw new Exception("You are not the creator of this Vault");
