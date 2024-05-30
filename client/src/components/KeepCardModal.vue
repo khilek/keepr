@@ -57,7 +57,7 @@ async function eraseKeep(keepId) {
       <div class="modal-content" v-if="activeKeep">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="keepCardModalLabel"><i class="mdi mdi-eye" title="VIEWS"></i> {{
-            activeKeep.views }} <i class="mdi mdi-pin-outline" title="KEPT"></i>{{ activeKeep.views }}
+            activeKeep.views }} <i class="mdi mdi-pin-outline" title="KEPT"></i>{{ activeKeep.kept }}
           </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>

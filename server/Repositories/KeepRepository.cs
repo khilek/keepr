@@ -63,10 +63,12 @@ GROUP BY (keep.id);";
     string sql = @"
         SELECT
         keep.*,
+        COUNT(vaultkeep.id) AS kept,
         accounts.*
         FROM keep
         JOIN accounts ON accounts.id = keep.creatorId
-        WHERE keep.id = @keepId;";
+        LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
+        GROUP BY (keep.id);";
 
     Keep keep = _db.Query<Keep, Profile, Keep>(sql, PopulateCreator, new { keepId }).FirstOrDefault();
 

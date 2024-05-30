@@ -90,9 +90,35 @@ GROUP BY (vaultkeep.id);
 --     LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
 -- GROUP BY (keep.id)
 
+-- SELECT keep.*, COUNT(vaultkeep.id) AS kept, accounts.*
+-- FROM
+--     keep
+--     JOIN accounts ON keep.creatorId = accounts.id
+--     LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
+-- GROUP BY (keep.id)
+
 SELECT keep.*, COUNT(vaultkeep.id) AS kept, accounts.*
 FROM
     keep
     JOIN accounts ON keep.creatorId = accounts.id
     LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
-GROUP BY (keep.id)
+GROUP BY (keep.id);
+
+SELECT keep.*, COUNT(vaultkeep.id) AS kept, accounts.*
+FROM
+    keep
+    JOIN accounts ON accounts.id = keep.creatorId
+    LEFT JOIN vaultkeep ON vaultkeep.keepId = keep.id
+GROUP BY (keep.id);
+
+WHERE keep.id = @keepId;
+
+";
+
+
+            string sql = @"
+SELECT keep.*, accounts.*
+FROM keep
+    JOIN accounts ON accounts.id = keep.creatorId
+WHERE
+    keep.id = @keepId;
