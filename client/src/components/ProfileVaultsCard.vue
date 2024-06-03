@@ -16,22 +16,22 @@ const route = useRoute()
 
 defineProps({ profileVault: { type: Vault, required: true } })
 
-async function eraseVault(vaultId) {
-  try {
+// async function eraseVault(vaultId) {
+//   try {
 
-    const wantsToErase = await Pop.confirm('Are you sure you want to Erase?', 'There is no undoing this...', 'ERASE', "question")
+//     const wantsToErase = await Pop.confirm('Are you sure you want to Erase?', 'There is no undoing this...', 'ERASE', "question")
 
-    if (!wantsToErase) return
+//     if (!wantsToErase) return
 
-    logger.log('ERASING KEEP', vaultId)
+//     logger.log('ERASING KEEP', vaultId)
 
-    await vaultsService.eraseVault(vaultId)
+//     await vaultsService.eraseVault(vaultId)
 
-  } catch (error) {
-    Pop.toast("Couldn't Erase Keep")
-    logger.error(error)
-  }
-}
+//   } catch (error) {
+//     Pop.toast("Couldn't Erase Keep")
+//     logger.error(error)
+//   }
+// }
 
 
 </script>

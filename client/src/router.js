@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { authGuard } from '@bcwdev/auth0provider-client'
+import { authGuard, authSettled } from '@bcwdev/auth0provider-client'
 
 function loadPage(page) {
   return () => import(`./pages/${page}.vue`)
@@ -19,7 +19,9 @@ const routes = [
   {
     path: '/vaults/:vaultId',
     name: 'Vault',
-    component: loadPage('VaultDetailsPage')
+    component: loadPage('VaultDetailsPage'),
+    beforeEnter: authSettled
+    // FIXME add the check to see if I am logged in look at help reviews for this clue
   },
   {
     path: '/profiles/:profileId',
